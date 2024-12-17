@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import { c } from "vite/dist/node/types.d-aGj9QkWt";
 import { ref } from "vue";
 
 export const useUserStore = defineStore('user', {
@@ -12,7 +11,7 @@ export const useUserStore = defineStore('user', {
             first_name: null,
             last_name: null,
             email: null,
-            zc_id: null,
+            uni_id: null,
             major: null,
             year: null,
             access: null,
@@ -33,7 +32,7 @@ export const useUserStore = defineStore('user', {
                 this.user.first_name = localStorage.getItem('user.first_name')
                 this.user.last_name = localStorage.getItem('user.last_name')
                 this.user.email = localStorage.getItem('user.email')
-                this.user.zc_id = localStorage.getItem('user.zc_id')
+                this.user.uni_id = localStorage.getItem('user.uni_id')
                 this.user.major = localStorage.getItem('user.major')
                 this.user.year = localStorage.getItem('user.year')
                 this.user.access = localStorage.getItem('user.access')
@@ -65,7 +64,7 @@ export const useUserStore = defineStore('user', {
             this.user.first_name = null
             this.user.last_name = null
             this.user.email = null
-            this.user.zc_id = null
+            this.user.uni_id = null
             this.user.major = null
             this.user.year = null
             this.user.access = null
@@ -78,7 +77,7 @@ export const useUserStore = defineStore('user', {
             localStorage.setItem('user.first_name', '')
             localStorage.setItem('user.last_name', '')
             localStorage.setItem('user.email', '')
-            localStorage.setItem('user.zc_id', '')
+            localStorage.setItem('user.uni_id', '')
             localStorage.setItem('user.major', '')
             localStorage.setItem('user.year', '')
         },
@@ -90,7 +89,7 @@ export const useUserStore = defineStore('user', {
             this.user.first_name = user.first_name
             this.user.last_name = user.last_name
             this.user.email = user.email
-            this.user.zc_id = user.zc_id
+            this.user.uni_id = user.uni_id
             this.user.major = user.major
             this.user.year = user.year
 
@@ -98,7 +97,7 @@ export const useUserStore = defineStore('user', {
             localStorage.setItem('user.first_name', user.first_name)
             localStorage.setItem('user.last_name', user.last_name)
             localStorage.setItem('user.email', user.email)
-            localStorage.setItem('user.zc_id', user.zc_id)
+            localStorage.setItem('user.uni_id', user.uni_id)
             localStorage.setItem('user.major', user.major)
             localStorage.setItem('user.year', user.year)
 

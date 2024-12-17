@@ -11,14 +11,14 @@ export default {
         return {
             currentYear: new Date().getFullYear(),
             form: {
-                firstName: '',
-                lastName: '',
+                first_name: '',
+                last_name: '',
                 email: '',
                 password1: '',
                 password2: '',
                 major: '',
                 year: '',
-                zewailcityID: '',
+                uni_id: '',
             },
             errors: [],
         };
@@ -26,41 +26,41 @@ export default {
     methods: {
         submitForm() {
             this.errors = []
-            if (!this.form.firstName) { this.errors.push('First name is required.'); }
-            if (!this.form.lastName) { this.errors.push('Last name is required.'); }
+            if (!this.form.first_name) { this.errors.push('First name is required.'); }
+            if (!this.form.last_name) { this.errors.push('Last name is required.'); }
             if (!this.form.email) { this.errors.push('Email is required.'); }
             if (!this.form.password1) { this.errors.push('Password is required.'); }
             if (!this.form.password2) { this.errors.push('Confirm password is required.'); }
             if (this.form.password1 !== this.form.password2) { this.errors.push('Passwords do not match.'); }
             if (!this.form.major) { this.errors.push('Major is required.'); }
             if (!this.form.year) { this.errors.push('Year is required.'); }
-            if (!this.form.zewailcityID) { this.errors.push('Zewailcity ID is required.'); }
+            if (!this.form.uni_id) { this.errors.push('Zewailcity ID is required.'); }
             if (this.errors.length === 0) {
                 console.log('form', this.form)
-                // axios
-                //     .post('/api/signup/', this.form)
-                //     .then(response => {
-                //         if (response.data.message === 'success') {
-                //             this.toastStore.showToast(5000, 'The user is registered', 'bg-emerald-500')
-                //             this.form.firstName = ''
-                //             this.form.lastName = ''
-                //             this.form.email = ''
-                //             this.form.password1 = ''
-                //             this.form.password2 = ''
-                //             this.form.major = ''
-                //             this.form.year = ''
-                //             this.form.zewailcityID = ''
-                //         } else {
-                //             const data = JSON.parse(response.data.message)
-                //             for (const key in data){
-                //                 this.errors.push(data[key][0].message)
-                //             }
-                //             this.toastStore.showToast(5000, 'Something went wrong. Please try again', 'bg-red-300')
-                //         }
-                //     })
-                //     .catch(error => {
-                //         console.log('error', error)
-                //     })
+                axios
+                    .post('/api/signup/', this.form)
+                    .then(response => {
+                        if (response.data.message === 'success') {
+                            this.toastStore.showToast(5000, 'The user is registered', 'bg-emerald-500')
+                            this.form.first_name = ''
+                            this.form.last_name = ''
+                            this.form.email = ''
+                            this.form.password1 = ''
+                            this.form.password2 = ''
+                            this.form.major = ''
+                            this.form.year = ''
+                            this.form.uni_id = ''
+                        } else {
+                            const data = JSON.parse(response.data.message)
+                            for (const key in data){
+                                this.errors.push(data[key][0].message)
+                            }
+                            this.toastStore.showToast(5000, 'Something went wrong. Please try again', 'bg-red-300')
+                        }
+                    })
+                    .catch(error => {
+                        console.log('error', error)
+                    })
             }
         }
     }
@@ -96,13 +96,13 @@ export default {
                     <input
                         type="text"
                         placeholder="First name"
-                        v-model="form.firstName"
+                        v-model="form.first_name"
                         class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#00b4d1] focus:outline-none"
                     />
                     <input
                         type="text"
                         placeholder="Surname"
-                        v-model="form.lastName"
+                        v-model="form.last_name"
                         class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#00b4d1] focus:outline-none"
                     />
                     </div>
@@ -113,7 +113,7 @@ export default {
                         <input
                         type="text"
                         placeholder="Zewailcity ID"
-                        v-model="form.zewailcityID"
+                        v-model="form.uni_id"
                         class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#00b4d1] focus:outline-none"
                         />
                     </div>
