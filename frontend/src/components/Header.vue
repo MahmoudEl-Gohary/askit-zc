@@ -37,18 +37,6 @@ const logout = () => {
           Search
         </RouterLink>
 
-        <!-- Conditional Rendering for Login/Logout -->
-        <!-- <template v-if="isLoggedIn">
-          <div class="flex items-center space-x-4">
-            <span class="text-white font-medium">Hello, {{ userName }}</span>
-            <button
-              @click="logout"
-              class="bg-red-500 text-white hover:bg-red-600 rounded-lg px-4 py-2 font-medium transition-all duration-300 shadow-lg"
-            >
-              Logout
-            </button>
-          </div>
-        </template> -->
           <RouterLink to="/signin">
             <button
               class="bg-[#00b4d1] text-white hover:bg-[#0099b3] rounded-lg px-6 py-2 font-medium transition-all duration-300 transform hover:scale-105 shadow-lg"
