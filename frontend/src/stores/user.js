@@ -23,10 +23,10 @@ export const useUserStore = defineStore('user', {
     // Actions of the store
     actions: {
         initStore() {
-            console.log('initStore with access: ', localStorage.getItem('user.access'))
+            // console.log('initStore with access: ', localStorage.getItem('user.access'))
 
             if (localStorage.getItem('user.access')) {
-                console.log("User has access...")
+                // console.log("User has access...")
 
                 this.user.id = localStorage.getItem('user.id')
                 this.user.first_name = localStorage.getItem('user.first_name')
@@ -40,12 +40,12 @@ export const useUserStore = defineStore('user', {
                 this.user.isAuthenticated = true
 
                 this.refreshToken()
-                console.log('User has been initialized: ', this.user)
+                // console.log('User has been initialized: ', this.user)
             }
         },
 
         setToken(data) {
-            console.log('setToken: ', data)
+            // console.log('setToken: ', data)
 
             this.user.access = data.access
             this.user.refresh = data.refresh
@@ -54,11 +54,11 @@ export const useUserStore = defineStore('user', {
             localStorage.setItem('user.access', data.access)
             localStorage.setItem('user.refresh', data.refresh)
 
-            console.log('user.access: ', localStorage.getItem('user.access'))
+            // console.log('user.access: ', localStorage.getItem('user.access'))
         },
 
         removeToken() {
-            console.log('removing Token...')
+            // console.log('removing Token...')
 
             this.user.id = null
             this.user.first_name = null
@@ -83,7 +83,7 @@ export const useUserStore = defineStore('user', {
         },
 
         setUserInfo(user) {
-            console.log('setting user infor...')
+            // console.log('setting user info...')
 
             this.user.id = user.id
             this.user.first_name = user.first_name
@@ -101,7 +101,7 @@ export const useUserStore = defineStore('user', {
             localStorage.setItem('user.major', user.major)
             localStorage.setItem('user.year', user.year)
 
-            console.log('user: ', this.user)
+            // console.log('user: ', this.user)
         },
 
         refreshToken() {
@@ -116,8 +116,7 @@ export const useUserStore = defineStore('user', {
                     axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.access
                 })
                 .catch((error)=>{
-                    console.log(error)
-
+                    // console.log(error)
                     this.removeToken()
                 })
         }

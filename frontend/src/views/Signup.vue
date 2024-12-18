@@ -36,7 +36,7 @@ export default {
             if (!this.form.year) { this.errors.push('Year is required.'); }
             if (!this.form.uni_id) { this.errors.push('Zewailcity ID is required.'); }
             if (this.errors.length === 0) {
-                console.log('form', this.form)
+                // console.log('form', this.form)
                 axios
                     .post('/api/signup/', this.form)
                     .then(response => {

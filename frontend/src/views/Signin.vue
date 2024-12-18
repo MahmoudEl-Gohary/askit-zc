@@ -1,11 +1,11 @@
 <script>
 import axios from 'axios';
-import { useToastStore } from '@/stores/toast';
+import { useUserStore } from '@/stores/user';
 
 export default {
 
     setup() {
-        const userStore = useToastStore();
+        const userStore = useUserStore();
         return { userStore };
     },
 
@@ -25,29 +25,30 @@ export default {
             if (this.form.email === '') { this.errors.push('Your e-mail is missing') }
             if (this.form.password === '') { this.errors.push('Your password is missing') }
             if (this.errors.length === 0) {
-                console.log('form', this.form)
-                // await axios
-                //     .post('/api/login/', this.form)
-                //     .then(response => {
-                //         this.userStore.setToken(response.data)
-                //         axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.access;
-                //     })
-                //     .catch(error => {
-                //         console.log('error', error)
-                //         this.errors.push('The email or password is incorrect!')
-                //     })
+                // console.log('form', this.form)
+                await axios
+                    .post('/api/signin/', this.form)
+                    .then(response => {
+                        // console.log('response', response)
+                        this.userStore.setToken(response.data)
+                        axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.access;
+                    })
+                    .catch(error => {
+                        // console.log('error', error)
+                        this.errors.push('The email or password is incorrect!')
+                    })
             }
 
             if (this.errors.length === 0) {
-                // await axios
-                //     .get('/api/me/')
-                //     .then(response => {
-                //         this.userStore.setUserInfo(response.data)
-                //         this.$router.push('/feed')
-                //     })
-                //     .catch(error => {
-                //         console.log('error', error)
-                //     })
+                await axios
+                    .get('/api/me/')
+                    .then(response => {
+                        this.userStore.setUserInfo(response.data)
+                        this.$router.push('/feed')
+                    })
+                    .catch(error => {
+                        console.log('error', error)
+                    })
             }
         }
     }
