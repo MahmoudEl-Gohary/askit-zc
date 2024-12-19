@@ -226,9 +226,9 @@ export default {
         <footer class="py-4 text-gray-600 w-full">
         <div class="mt-4 text-center text-xs text-gray-500">
             <RouterLink to="/" class="hover:underline mx-2 text-[#00b4d1]">Sign In</RouterLink>
-            <a href="#" class="hover:underline mx-2 text-[#00b4d1]">Privacy</a>
-            <a href="#" class="hover:underline mx-2 text-[#00b4d1]">Terms</a>
-            <a href="#" class="hover:underline mx-2 text-[#00b4d1]">Help</a>
+            <RouterLink to="/privacy" class="hover:underline mx-2 text-[#00b4d1]">Privacy</RouterLink>
+            <RouterLink to="/terms" class="hover:underline mx-2 text-[#00b4d1]">Terms</RouterLink>
+            <RouterLink to="/help" class="hover:underline mx-2 text-[#00b4d1]">Help</RouterLink>
         </div>
         <p class="mt-4 text-center text-xs text-gray-500">
             &copy; Askit ZC

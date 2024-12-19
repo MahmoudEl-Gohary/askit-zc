@@ -33,7 +33,7 @@ const logout = () => {
         <RouterLink to="/profile" class="text-white hover:text-[#fff2f2] cursor-pointer transition-all duration-300">
           Profile
         </RouterLink>
-        <RouterLink to="/contact" class="text-white hover:text-[#fff2f2] cursor-pointer transition-all duration-300">
+        <RouterLink to="/Search" class="text-white hover:text-[#fff2f2] cursor-pointer transition-all duration-300">
           Search
         </RouterLink>
 
