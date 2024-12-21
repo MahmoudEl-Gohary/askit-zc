@@ -3,6 +3,10 @@ import Signin from '../views/Signin.vue'
 import SignupView from '../views/Signup.vue'
 import profile from '../views/profile.vue'
 import feed from '@/views/feed.vue'
+import search from '@/views/Search.vue'
+import help from '@/views/footer/help.vue'
+import terms from '@/views/footer/terms.vue'
+import privacy from '@/views/footer/privacy.vue'
 
 
 const router = createRouter({
@@ -32,6 +36,26 @@ const router = createRouter({
       path: '/feed',
       name: 'feed',
       component: feed
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: search
+    },
+    {
+      path: '/terms',
+      name: 'terms',
+      component: terms
+    },
+    {
+      path: '/privacy',
+      name: 'privacy',
+      component: privacy
+    },
+    {
+      path: '/help',
+      name: 'help',
+      component: help
     }
   ],
 })
