@@ -109,18 +109,19 @@ const questions = computed(() => questionsStore.questions);
 
             <!-- Center Column -->
             <div>
-              <button
-              class="flex items-center bg-white px-3 py-1.5 rounded-md hover:bg-gray-200 transition-all"
-
+              <router-link
+                :to="{ name: 'QuestionView', params: { id: question.id } }"
+                class="flex items-center bg-white px-3 py-1.5 rounded-md hover:bg-gray-200 transition-all"
               >
                 <img
                   src="/src/assets/Icons/answer.png"
                   alt="Answers Icon"
                   class="h-5 w-5 mr-2"
                 />
-                <!-- {{ post.Answers }} --> 10 Answers 
-              </button>
+                {{ question.answers_count }} Answers
+              </router-link>
             </div>
+
 
             <!-- Right Column -->
             <div>
