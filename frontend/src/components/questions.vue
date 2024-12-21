@@ -118,7 +118,7 @@ const questions = computed(() => questionsStore.questions);
                   alt="Answers Icon"
                   class="h-5 w-5 mr-2"
                 />
-                {{ question.answers_count }} Answers
+                {{   question.answers_count }} Answers
               </router-link>
             </div>
 

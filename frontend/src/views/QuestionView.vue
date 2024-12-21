@@ -20,7 +20,7 @@ export default {
         is_anonymous: false,
         answers: [],
       },
-      body: '', // To hold the new comment input
+      body: '', // To hold the new answer input
     };
   },
 
@@ -52,7 +52,7 @@ export default {
     submitForm() {
       console.log('Submitting form with body:', this.body); // Debug log
       if (!this.body.trim()) {
-        console.error('Comment body is empty.');
+        console.error('Answer body is empty.');
         return; // Prevent empty submissions
       }
 
@@ -79,52 +79,90 @@ export default {
     <!-- Question Details -->
     <div v-if="question.id" class="max-w-5xl mx-auto px-6 py-12 bg-gray-50">
       <div class="bg-white shadow-lg rounded-lg p-6">
-        <h1 class="text-3xl font-bold text-gray-800">{{ question.title }}</h1>
-        <div class="flex items-center mt-2 text-sm text-gray-500">
-          <span v-if="question.is_anonymous">Anonymous User</span>
-          <span v-else>
-            {{ question.created_by.first_name }} {{ question.created_by.last_name }}
-          </span>
-          <span class="ml-4">{{ question.created_at_formated }}</span>
+        <!-- Question Creator Info -->
+        <div class="flex items-center space-x-4 mb-4">
+          <img
+            v-if="question.is_anonymous"
+            src="../assets/images/anonymous.png"
+            alt="Anonymous"
+            class="h-12 w-12 object-cover rounded-full"
+          />
+          <img
+            v-else
+            src="../assets/images/profile.jpg"
+            alt="User Profile"
+            class="h-12 w-12 object-cover rounded-full"
+          />
+          <div>
+            <h2 class="text-lg font-semibold text-gray-800">
+              <span v-if="question.is_anonymous">Anonymous User</span>
+              <span v-else>
+                {{ question.created_by.first_name }} {{ question.created_by.last_name }}
+              </span>
+            </h2>
+            <p class="text-sm text-gray-500">{{ question.created_at_formated }}</p>
+          </div>
         </div>
-        <p class="text-gray-700 text-lg mb-6">{{ question.body }}</p>
+
+        <!-- Question Content -->
+        <h1 class="text-3xl font-bold text-gray-800">{{ question.title }}</h1>
+        <p class="text-gray-700 text-lg mt-4">{{ question.body }}</p>
       </div>
 
       <!-- Answers Section -->
       <div class="bg-white shadow-lg rounded-lg p-6 mt-8">
         <h2 class="text-2xl font-semibold text-gray-800 mb-4">Answers</h2>
-        <div v-if="question.answers && question.answers.length > 0" class="space-y-4">
+        <div v-if="question.answers && question.answers.length > 0" class="space-y-6">
           <div
             v-for="answer in question.answers"
             :key="answer.id"
             class="p-4 bg-gray-100 rounded-lg shadow-sm"
           >
-            <p class="text-gray-700">{{ answer.body }}</p>
-            <div class="text-sm text-gray-500 mt-2">
-              <span v-if="answer.is_anonymous">Anonymous User</span>
-              <span v-else>
-                {{ answer.created_by.first_name }} {{ answer.created_by.last_name }}
-              </span>
-              <span class="ml-4">{{ answer.created_at_formated }}</span>
+            <!-- Answerer Info -->
+            <div class="flex items-center space-x-4 mb-2">
+              <img
+                v-if="answer.is_anonymous"
+                src="../assets/images/anonymous.png"
+                alt="Anonymous"
+                class="h-10 w-10 object-cover rounded-full"
+              />
+              <img
+                v-else
+                src="../assets/images/profile.jpg"
+                alt="User Profile"
+                class="h-10 w-10 object-cover rounded-full"
+              />
+              <div>
+                <h3 class="text-md font-semibold text-gray-800">
+                  <span v-if="answer.is_anonymous">Anonymous User</span>
+                  <span v-else>
+                    {{ answer.created_by.first_name }} {{ answer.created_by.last_name }}
+                  </span>
+                </h3>
+                <p class="text-sm text-gray-500">{{ answer.created_at_formated }}</p>
+              </div>
             </div>
+
+            <!-- Answer Content -->
+            <p class="text-gray-700">{{ answer.body }}</p>
           </div>
         </div>
         <div v-else class="text-gray-500">No answers yet. Be the first to answer!</div>
       </div>
 
-      <!-- Add a Comment Section -->
+      <!-- Add a Answer Section -->
       <div class="bg-white shadow-lg rounded-lg p-6 mt-8">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Add a Comment</h2>
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Add an Answer</h2>
         <textarea
           v-model="body"
-          placeholder="Write your comment here..."
+          placeholder="Write your answer here..."
           class="w-full h-28 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
         ></textarea>
         <button
           @click="submitForm"
           class="mt-4 px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
         >
-          Submit Comment
+          Submit Answer
         </button>
       </div>
     </div>
@@ -136,4 +174,6 @@ export default {
   </div>
 </template>
 
-
+<style scoped>
+/* Add any additional styles if necessary */
+</style>
