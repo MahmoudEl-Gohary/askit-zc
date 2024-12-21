@@ -69,7 +69,8 @@ INSTALLED_APPS = [
     
     'corsheaders', # adding corsheaders to the list of installed apps
     
-    'users'
+    'users',
+    'questions',
 ]
 
 MIDDLEWARE = [
