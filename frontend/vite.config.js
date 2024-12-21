@@ -6,6 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/askit-zc/', // This specifies the base URL for GitHub Pages
   plugins: [
     vue(),
     vueDevTools(),
