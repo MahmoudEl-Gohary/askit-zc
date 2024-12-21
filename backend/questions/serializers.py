@@ -6,4 +6,4 @@ class QuestionSerializer(serializers.ModelSerializer):
     created_by = UserSerializer(read_only=True)
     class Meta:
         model = Questions
-        fields = ('id', 'title', 'body', 'created_at_formated', 'created_by', 'is_anonymous')
+        fields = ('id', 'title', 'body', 'upvotes_count', 'downvotes_count', 'created_at_formated', 'created_by', 'is_anonymous')

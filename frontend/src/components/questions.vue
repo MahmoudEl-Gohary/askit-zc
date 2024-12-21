@@ -2,8 +2,41 @@
 <script setup>
 import { onMounted, computed } from 'vue';
 import { useQuestionsStore } from '@/stores/questions';
+import axios from 'axios';
 
 const questionsStore = useQuestionsStore();
+
+function upvoteQuestion(id) {
+  axios
+    .post(`/api/questions/${id}/upVotes/`)
+    .then((response) => {
+      console.log(response.data);
+      if (response.data.message == 'UpVoted') {
+        this.question.upvotes_count += 1;
+      }
+      questionsStore.fetchQuestions();
+    })
+    .catch((error) => {
+      console.error('Error upvoting question:', error);
+    });
+}
+
+function downvoteQuestion(id) {
+  console.log('Downvoting question with id:', id);
+
+  axios
+    .post(`/api/questions/${id}/downVotes/`)
+    .then((response) => {
+      console.log(response.data);
+      if (response.data.message == 'DownVoted') {
+        this.question.downvotes_count += 1;
+      }
+      questionsStore.fetchQuestions();
+    })
+    .catch((error) => {
+      console.error('Error downvoting question:', error);
+    });
+}
 
 onMounted(() => {
   questionsStore.fetchQuestions();
@@ -61,17 +94,18 @@ const questions = computed(() => questionsStore.questions);
             <!-- Left Column -->
             <div>
               <button
-              class="flex items-center bg-white px-3 py-1.5 rounded-md hover:bg-gray-200 transition-all"
-
+                class="flex items-center bg-white px-3 py-1.5 rounded-md hover:bg-gray-200 transition-all"
+                @click="upvoteQuestion(question.id)"
               >
                 <img
                   src="/src/assets/Icons/Upvote.png"
                   alt="UpVote Icon"
                   class="h-5 w-5 mr-2"
                 />
-                <!-- {{ post.UpVote }} --> 10 UpVote
+                {{ question.upvotes_count }} UpVotes
               </button>
             </div>
+
 
             <!-- Center Column -->
             <div>
@@ -92,14 +126,14 @@ const questions = computed(() => questionsStore.questions);
             <div>
               <button
               class="flex items-center bg-white px-3 py-1.5 rounded-md hover:bg-gray-200 transition-all"
-
+              @click="downvoteQuestion(question.id)"
               >
                 <img
                   src="/src/assets/Icons/downvote.png"
                   alt="DownVote Icon"
                   class="h-5 w-5 mr-2"
                 />
-                <!-- {{ post.DownVote }}--> 10 DownVote 
+                {{ question.downvotes_count }} DownVotes
               </button>
             </div>
           </div>
