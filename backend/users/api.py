@@ -1,5 +1,6 @@
 from .forms import SignupForm
 from django.http import JsonResponse
+from users.models import User
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 
 
@@ -15,7 +16,22 @@ def me(request):
         'year': request.user.year,
     })
     
-
+@api_view(['GET'])
+def user_view(request, id):  
+    try:
+        user = User.objects.get(pk=id) 
+        return JsonResponse({
+            'id': str(user.id),
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'email': user.email,
+            'uni_id': user.uni_id,
+            'major': user.major,
+            'year': user.year,
+        })
+    except User.DoesNotExist:
+        return JsonResponse({'error': 'User not found'}, status=404)
+    
 @api_view(['POST'])
 @authentication_classes([])
 @permission_classes([])

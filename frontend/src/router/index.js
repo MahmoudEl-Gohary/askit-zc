@@ -33,6 +33,12 @@ const router = createRouter({
       component: profile
     },
     {
+      path: '/profile/:id',
+      name: 'profile',
+      component: profile,
+      props: true
+    },
+    {
       path: '/feed',
       name: 'feed',
       component: feed
