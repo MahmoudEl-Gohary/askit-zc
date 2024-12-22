@@ -8,7 +8,7 @@ import help from '@/views/footer/help.vue'
 import terms from '@/views/footer/terms.vue'
 import privacy from '@/views/footer/privacy.vue'
 import QuestionView from '@/views/QuestionView.vue'
-
+import ForgotPaswword from '@/views/ForgotPaswword.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,6 +68,11 @@ const router = createRouter({
       path: '/question/:id',
       name: 'QuestionView',
       component: QuestionView,
+    },
+    {
+      path: '/forgotpassword',
+      name: 'ForgotPaswword',
+      component: ForgotPaswword,
     }
 
   ],
