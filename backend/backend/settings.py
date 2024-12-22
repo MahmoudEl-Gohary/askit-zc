@@ -17,9 +17,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8gvn!nwz4+f)4zte_q=our&j-q6tqipg&&0ha=t1a#xa=4(fdg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['askit-webapp.azurewebsites.net']
+ALLOWED_HOSTS = ['askit-webapp.azurewebsites.net', 'localhost', '127.0.0.1']
 
 # Configuring simple jwt
 
@@ -47,10 +47,12 @@ REST_FRAMEWORK = {
 # Configuring corsheaders
 
 CORS_ALLOWED_ORIGINS = [
+    "https://askit-webapp.azurewebsites.net",
     "http://localhost:5173",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
+    "https://askit-webapp.azurewebsites.net",
     "http://localhost:5173",
 ]
 
@@ -75,9 +77,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware', # adding corsheaders.middleware.CorsMiddleware to the list of middleware
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',  # Added this line
+    'corsheaders.middleware.CorsMiddleware', # adding corsheaders.middleware.CorsMiddleware to the list of middleware
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -159,6 +161,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'dist']  # Vue frontend build files
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # For collectstatic
+
+# Add WhiteNoise settings
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Default primary key field type
