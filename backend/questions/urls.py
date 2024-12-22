@@ -9,4 +9,6 @@ urlpatterns = [
     path('<uuid:id>/downVotes/', api.question_downvote, name='question_downvote'),
     path('<uuid:id>/removeVote/', api.remove_vote, name='question_remove_vote'),
     path('votes/', api.get_user_votes, name='get_user_votes'),
+    path('<uuid:id>/answers/', api.question_create_answer, name='question_create_answer'),
+    path('<uuid:id>/', api.question_detail, name='question_detail'),
 ]

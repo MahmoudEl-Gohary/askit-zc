@@ -1,9 +1,9 @@
 from users.models import User
-from .models import Questions, UpVote, DownVote
+from .models import Questions, UpVote, DownVote, Answers
 from .forms import QuestionsForm
 from django.shortcuts import render
 from django.http import JsonResponse
-from .serializers import QuestionSerializer
+from .serializers import QuestionSerializer, AnswersSerializer, QuestionDetailSerializer
 from users.serializers import UserSerializer
 from rest_framework.decorators import api_view
 
@@ -117,3 +117,28 @@ def get_user_votes(request):
         votes.append({'question_id': downvote.question.id, 'type': 'downvote'})
 
     return JsonResponse(votes, safe=False)
+
+
+@api_view(['GET'])
+def question_detail(request, id):
+    question_obj = Questions.objects.get(pk=id)
+
+
+    return JsonResponse({
+        'question': QuestionDetailSerializer(question_obj).data
+    })
+
+
+@api_view(['POST'])
+def question_create_answer(request, id):
+
+    answer = Answers.objects.create(body=request.data['body'], created_by=request.user)
+    question = Questions.objects.get(pk=id)
+    question.answers.add(answer)
+    question.answers_count += 1
+    question.save()
+
+    serializer = AnswersSerializer(answer)
+
+
+    return JsonResponse(serializer.data, safe=False)

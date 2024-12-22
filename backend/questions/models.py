@@ -3,6 +3,14 @@ from django.db import models
 from users.models import User
 from django.utils.timesince import timesince
 
+class Answers(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    body = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User,related_name='answers' ,on_delete=models.CASCADE)
+
+    def created_at_formated(self):
+        return timesince(self.created_at)
 class Questions(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=100)
@@ -12,13 +20,15 @@ class Questions(models.Model):
     downvotes_count = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, related_name='questions', on_delete=models.CASCADE)
+    answers = models.ManyToManyField(Answers, blank=True)
+    answers_count = models.IntegerField(default=0)
+
 
     class Meta:
         ordering = ['-created_at']
 
     def created_at_formated(self):
         return timesince(self.created_at)
-
 
 class UpVote(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

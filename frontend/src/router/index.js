@@ -7,7 +7,8 @@ import search from '@/views/Search.vue'
 import help from '@/views/footer/help.vue'
 import terms from '@/views/footer/terms.vue'
 import privacy from '@/views/footer/privacy.vue'
-
+import QuestionView from '@/views/QuestionView.vue'
+import AdminDashboard from '@/views/AdminDashboard.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,12 +34,6 @@ const router = createRouter({
       component: profile
     },
     {
-      path: '/profile/:id',
-      name: 'profile',
-      component: profile,
-      props: true
-    },
-    {
       path: '/feed',
       name: 'feed',
       component: feed
@@ -62,6 +57,16 @@ const router = createRouter({
       path: '/help',
       name: 'help',
       component: help
+    },
+    {
+      path: '/QuestionView:id',
+      name: 'QuestionView',
+      component: QuestionView
+    },
+    {
+      path: '/AdminDashboard',
+      name: 'AdminDashboard',
+      component: AdminDashboard
     }
   ],
 })
