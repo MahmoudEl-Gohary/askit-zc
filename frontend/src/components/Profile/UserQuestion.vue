@@ -165,7 +165,7 @@ export default {
 
                 <!-- Center Column Answers -->
                 <div>
-                    <router-link
+                    <RouterLink
                         :to="{ name: 'QuestionView', params: { id: question.id } }"
                         class="flex items-center bg-white px-3 py-1.5 rounded-md hover:bg-gray-200 transition-all"
                     >
@@ -174,8 +174,8 @@ export default {
                             alt="Answers Icon"
                             class="h-5 w-5 mr-2"
                         />
-                        {{   question.answers_count }} Answers
-                    </router-link>
+                        {{ question.answers_count }} Answers
+                    </RouterLink>
                 </div>
 
                 <!-- Downvote Button -->
